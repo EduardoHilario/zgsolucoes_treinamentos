@@ -2,8 +2,8 @@ package br.com.zg.provaestagio.model
 
 class Portao {
 
-	private def status
-	def ultimoStatus
+	Status status
+	Status ultimoStatus
 
 	Portao() {
 		this.status = Status.FECHADO

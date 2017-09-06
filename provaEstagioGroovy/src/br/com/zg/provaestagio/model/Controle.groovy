@@ -2,20 +2,20 @@ package br.com.zg.provaestagio.model
 
 class Controle {
 
-	// Substituir def pelo tipo apropriado
-	private def portao = new Portao()
-	def retorno
+	Portao portao = new Portao()
+	String retorno
 
 	Controle(portao) {
 		this.portao = portao
 	}
 
 
-	def executeComando(comando) {
+	def executeComando(String comando) {
 
 		// usar o .each no lugar no for
-		for (c in comando) {
-			switch (c) {
+		comando.each {
+
+			switch (it) {
 				case 'P':
 					pressione()
 					break
@@ -23,14 +23,16 @@ class Controle {
 					obstaculo()
 					break
 				case '.':
-					manter(c)
+					manter()
+					break
+				default:
+					break
 			}
 		}
 
 		return retorno
 	}
 
-	//Trocar os gets e sets pelo acesso direto(pois os gets e sets serão invocados internamente pelo groovy
 	void pressione() {
 		switch (portao.status) {
 			case Status.FECHADO:
@@ -39,10 +41,10 @@ class Controle {
 			case Status.ABRINDO:
 			case Status.FECHANDO:
 				portao.setStatus(Status.PARADO)
-				manter('P')
+				manter()
 				break
 			case Status.PARADO:
-				if (portao.getUltimoStatus().equals(Status.ABRINDO)) {
+				if (portao.ultimoStatus.equals(Status.ABRINDO)) {
 					abrir()
 				} else {
 					fechar()
@@ -69,10 +71,7 @@ class Controle {
 				case Status.FECHANDO:
 				case Status.ABRINDO:
 				case Status.PARADO:
-					def r = retorno.charAt(retorno.length() - 1)
-					def rNumerico = Integer.parseInt(String.valueOf(r))
-					rNumerico++
-					retorno += rNumerico
+					retorno += incrementeRetorno(retorno)
 					break
 				default:
 					retorno += 1
@@ -91,21 +90,18 @@ class Controle {
 			case Status.ABRINDO:
 			case Status.FECHANDO:
 			case Status.PARADO:
-				def r = retorno.charAt(retorno.length() - 1)
-				def rNumerico = Integer.parseInt(String.valueOf(r))
-				rNumerico--
-				retorno += rNumerico
+				retorno += decrementeRetorno(retorno)
 				portao.setStatus(Status.FECHANDO)
 		}
 	}
 
-	void manter(c) {
+	void manter() {
 
 		if (retorno == null) {
 			retorno = "0"
 		} else {
-			// Aqui uma sintaxe mais enxuta seria retorno[-1]
-			def r = retorno.charAt(retorno.length() - 1)
+
+			char r = retorno[-1]
 			switch (portao.status) {
 				case Status.ABRINDO:
 					if (r == '5') {
@@ -126,10 +122,21 @@ class Controle {
 					retorno += "5"
 					break
 				case Status.PARADO:
-					retorno += retorno.charAt(retorno.length() - 1)
+					retorno += retorno[-1]
 
 			}
 		}
+	}
+
+	Integer incrementeRetorno(String retorno) {
+		Integer c = Integer.valueOf(retorno[-1])
+		return c + 1
+
+	}
+
+	Integer decrementeRetorno(String retorno) {
+		Integer c = Integer.valueOf(retorno[-1])
+		return c - 1
 	}
 
 }
