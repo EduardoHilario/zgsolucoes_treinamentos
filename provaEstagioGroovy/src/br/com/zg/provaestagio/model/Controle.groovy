@@ -5,6 +5,7 @@ class Controle {
 	private def portao = new Portao()
 	def retorno
 
+	// Defina também os tipos nos parâmetros de métodos e construtores
 	Controle(portao) {
 		this.portao = portao
 	}
