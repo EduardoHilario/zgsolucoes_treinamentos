@@ -5,14 +5,13 @@ class Controle {
 	Portao portao = new Portao()
 	String retorno
 
-	Controle(portao) {
+	Controle(Portao portao) {
 		this.portao = portao
 	}
 
 
 	def executeComando(String comando) {
 
-		// usar o .each no lugar no for
 		comando.each {
 
 			switch (it) {

@@ -10,7 +10,7 @@ class Portao {
 	}
 
 
-	void setStatus(status) {
+	void setStatus(Status status) {
 		this.ultimoStatus = this.status
 		this.status = status
 	}
