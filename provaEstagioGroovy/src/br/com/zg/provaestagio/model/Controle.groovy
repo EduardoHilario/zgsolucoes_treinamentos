@@ -2,6 +2,7 @@ package br.com.zg.provaestagio.model
 
 class Controle {
 
+	// Substituir def pelo tipo apropriado
 	private def portao = new Portao()
 	def retorno
 
@@ -12,6 +13,7 @@ class Controle {
 
 	def executeComando(comando) {
 
+		// usar o .each no lugar no for
 		for (c in comando) {
 			switch (c) {
 				case 'P':
@@ -28,6 +30,7 @@ class Controle {
 		return retorno
 	}
 
+	//Trocar os gets e sets pelo acesso direto(pois os gets e sets serão invocados internamente pelo groovy
 	void pressione() {
 		switch (portao.status) {
 			case Status.FECHADO:
@@ -101,6 +104,7 @@ class Controle {
 		if (retorno == null) {
 			retorno = "0"
 		} else {
+			// Aqui uma sintaxe mais enxuta seria retorno[-1]
 			def r = retorno.charAt(retorno.length() - 1)
 			switch (portao.status) {
 				case Status.ABRINDO:
