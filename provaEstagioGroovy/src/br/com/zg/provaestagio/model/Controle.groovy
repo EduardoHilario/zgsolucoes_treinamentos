@@ -5,6 +5,7 @@ class Controle {
 	Portao portao = new Portao()
 	String retorno
 
+	// Defina também os tipos nos parâmetros de métodos e construtores
 	Controle(portao) {
 		this.portao = portao
 	}
