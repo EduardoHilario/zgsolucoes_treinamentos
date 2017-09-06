@@ -22,6 +22,7 @@
 .idea/**/libraries
 
 # CMake
+
 cmake-build-debug/
 
 # Mongo Explorer plugin:
