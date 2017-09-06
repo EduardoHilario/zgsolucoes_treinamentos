@@ -2,6 +2,7 @@ package br.com.zg.provaestagio.model
 
 class Portao {
 
+	//Substituir def  por tipo apropriado
 	private def status
 	def ultimoStatus
 
