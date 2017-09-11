@@ -2,14 +2,14 @@
 <project version="4">
   <component name="ChangeListManager">
     <list default="true" id="8db618b0-c0ac-485e-a59c-b4757e0f07e5" name="Default" comment="">
-      <change type="NEW" beforePath="" afterPath="$PROJECT_DIR$/../pokerHand/src/.gitignore" />
-      <change type="NEW" beforePath="" afterPath="$PROJECT_DIR$/../pokerHand/src/br/com/zg/pokerhand/model/Carta.groovy" />
-      <change type="NEW" beforePath="" afterPath="$PROJECT_DIR$/../pokerHand/src/br/com/zg/pokerhand/model/Hands.groovy" />
-      <change type="NEW" beforePath="" afterPath="$PROJECT_DIR$/../pokerHand/src/br/com/zg/pokerhand/model/HandsTypifier.groovy" />
-      <change type="NEW" beforePath="" afterPath="$PROJECT_DIR$/../pokerHand/src/br/com/zg/pokerhand/model/ListOfCards.groovy" />
-      <change type="NEW" beforePath="" afterPath="$PROJECT_DIR$/../pokerHand/src/br/com/zg/pokerhand/model/Mao.groovy" />
-      <change type="NEW" beforePath="" afterPath="$PROJECT_DIR$/../pokerHand/src/br/com/zg/pokerhand/model/NaipeDaCarta.groovy" />
-      <change type="NEW" beforePath="" afterPath="$PROJECT_DIR$/../pokerHand/src/br/com/zg/pokerhand/model/ValorDaCarta.groovy" />
+      <change type="NEW" beforePath="" afterPath="$PROJECT_DIR$/../pokerHand/src/br/com/zg/pokerhand/test/Main.groovy" />
+      <change type="DELETED" beforePath="$PROJECT_DIR$/../pokerHand/src/br/com/zg/pokerhand/model/HandsTypifier.groovy" afterPath="" />
+      <change type="MOVED" beforePath="$PROJECT_DIR$/../pokerHand/src/br/com/zg/pokerhand/model/Hands.groovy" afterPath="$PROJECT_DIR$/../pokerHand/src/br/com/zg/pokerhand/model/Categoria.groovy" />
+      <change type="MOVED" beforePath="$PROJECT_DIR$/../pokerHand/src/br/com/zg/pokerhand/model/ListOfCards.groovy" afterPath="$PROJECT_DIR$/../pokerHand/src/br/com/zg/pokerhand/model/ConversorStringToMao.groovy" />
+      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/../pokerHand/src/br/com/zg/pokerhand/model/Carta.groovy" afterPath="$PROJECT_DIR$/../pokerHand/src/br/com/zg/pokerhand/model/Carta.groovy" />
+      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/../pokerHand/src/br/com/zg/pokerhand/model/Mao.groovy" afterPath="$PROJECT_DIR$/../pokerHand/src/br/com/zg/pokerhand/model/Mao.groovy" />
+      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/../pokerHand/src/br/com/zg/pokerhand/model/NaipeDaCarta.groovy" afterPath="$PROJECT_DIR$/../pokerHand/src/br/com/zg/pokerhand/model/NaipeDaCarta.groovy" />
+      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/../pokerHand/src/br/com/zg/pokerhand/model/ValorDaCarta.groovy" afterPath="$PROJECT_DIR$/../pokerHand/src/br/com/zg/pokerhand/model/ValorDaCarta.groovy" />
       <change type="MODIFICATION" beforePath="$PROJECT_DIR$/.idea/workspace.xml" afterPath="$PROJECT_DIR$/.idea/workspace.xml" />
     </list>
     <ignored path="$PROJECT_DIR$/out/" />
@@ -410,7 +410,7 @@
       <workItem from="1504721058597" duration="12000" />
       <workItem from="1504723287800" duration="2000" />
       <workItem from="1504723316185" duration="602000" />
-      <workItem from="1504876687256" duration="1484000" />
+      <workItem from="1504876687256" duration="2099000" />
     </task>
     <task id="LOCAL-00001" summary="add .gitignore">
       <created>1504709813067</created>
@@ -476,7 +476,7 @@
     </history-entry>
   </component>
   <component name="TimeTrackingManager">
-    <option name="totallyTimeSpent" value="20729000" />
+    <option name="totallyTimeSpent" value="21344000" />
   </component>
   <component name="ToolWindowManager">
     <frame x="43" y="-4" width="1877" height="1084" extended-state="6" />
