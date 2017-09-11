@@ -2,24 +2,23 @@ package br.com.zg.pokerhand.model
 
 enum ValorDaCarta {
 
-	DOIS('2' as char),
-	TRES('3' as char),
-	QUATRO('4' as char),
-	CINCO('5' as char),
-	SEIS('6' as char),
-	SETE('7' as char),
-	OITO('8' as char),
-	NOVE('9' as char),
-	DEZ('T' as char),
-	VALETE('J' as char),
-	RAINHA('Q' as char),
-	REI('K' as char),
-	ACE('A' as char)
+	DOIS(2),
+	TRES(3),
+	QUATRO(4),
+	CINCO(5),
+	SEIS(6),
+	SETE(7),
+	OITO(8),
+	NOVE(9),
+	DEZ(10),
+	VALETE(11),
+	RAINHA(12),
+	REI(13),
+	ACE(14)
 
-	char valorCaractere
+	int valorNum
 
-	ValorDaCarta(char string) {
-		this.valorCaractere = string
+	ValorDaCarta(int valorNum) {
+		this.valorNum = valorNum
 	}
-
 }
