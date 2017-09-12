@@ -42,7 +42,7 @@ class TesteConversor extends Specification {
 
 		where:
 		maoString        || resultado
-		"3S 3H 9C TD 5D" || Categoria.PAIR
+		"9S 2H 9C 3D 5D" || Categoria.PAIR
 		"3S 9H 3C TD 5D" || Categoria.PAIR
 		"3S 9H TC 3D 5D" || Categoria.PAIR
 		"3S 9H 5C TD 3D" || Categoria.PAIR
@@ -69,7 +69,7 @@ class TesteConversor extends Specification {
 
 		where:
 		maoString        || resultado
-		"2S 2H 4C 4D 5D" || Categoria.TWO_PAIR
+		"5S 2H 4C 4D 5D" || Categoria.TWO_PAIR
 		"2S 2H 4C 5D 4D" || Categoria.TWO_PAIR
 		"2S 2H 5C 4D 4D" || Categoria.TWO_PAIR
 		"2S 5H 2C 4D 4D" || Categoria.TWO_PAIR
@@ -91,7 +91,7 @@ class TesteConversor extends Specification {
 
 		where:
 		maoString        || resultado
-		"3S 3H 3C TD KD" || Categoria.THREE
+		"TS TH TC 3D KD" || Categoria.THREE
 		"3S 3H TC 3D KD" || Categoria.THREE
 		"3S 3H TC KD 3D" || Categoria.THREE
 		"3S TH 3C 3D KD" || Categoria.THREE
@@ -185,7 +185,7 @@ class TesteConversor extends Specification {
 
 		where:
 		maoString        || resultado
-		"KS 4H 4C 4D 4D" || Categoria.FOUR
+		"KS KH KC KD 4D" || Categoria.FOUR
 		"4S KH 4C 4D 4D" || Categoria.FOUR
 		"4S 4H KC 4D 4D" || Categoria.FOUR
 		"4S 4H 4C KD 4D" || Categoria.FOUR
@@ -248,7 +248,7 @@ class TesteConversor extends Specification {
 		mao2.classificaMao()
 
 		then:
-		comparaMaos.compareMaos(mao1,mao2)
+		resultado == comparaMaos.compareMaos(mao1,mao2)
 
 
 		where:
@@ -292,6 +292,7 @@ class TesteConversor extends Specification {
 		"2H 4H 6H 8H AS" | "3C 5C 6C 8C JS" || Resultado.WIN
 		"2H 2H 2H AH AS" | "2C 2C 2C JC JS" || Resultado.WIN
 		"2H 2H 5H AH AS" | "2C 2C 6C AC AS" || Resultado.LOSS
+
 
 	}
 

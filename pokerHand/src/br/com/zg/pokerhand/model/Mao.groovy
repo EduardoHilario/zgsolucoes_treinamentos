@@ -2,6 +2,7 @@ package br.com.zg.pokerhand.model
 
 class Mao {
 
+	Carta cartaDesempate = new Carta()
 	List<Carta> cartas = new ArrayList<Carta>()
 	Categoria categoria
 
@@ -30,38 +31,18 @@ class Mao {
 			categoria = Categoria.TWO_PAIR
 		} else if (isPair()) {
 			categoria = Categoria.PAIR
-		} else if (isHighCard()) {
+		} else  {
 			categoria = Categoria.HIGH_CARD
 		}
 	}
 
-	boolean isHighCard() {
-		boolean is = false
-
-
-		for (int i = 0; i < cartas.size(); i++) {
-			for (int j = 1; j < cartas.size(); j++) {
-				if (i != j) {
-					is = (cartas[i].compareTo(cartas[j]) != 0)
-					if (!is) {
-						return false
-					}
-				}
-			}
-		}
-		return is
-	}
 
 	boolean isPair() {
 		int c = 0
-		for (int i = 0; i < cartas.size(); i++) {
-			for (int j = 1; j < cartas.size(); j++) {
-				if (i != j) {
-					if (cartas[i].compareTo(cartas[j]) == 0) {
-
-						c++
-					}
-				}
+		for (int i = 0; i < cartas.size() - 1; i++) {
+			if (cartas[i] == cartas[i + 1]) {
+				cartaDesempate = cartas[i]
+				c++
 			}
 		}
 		if (c == 1) {
@@ -74,17 +55,16 @@ class Mao {
 
 	boolean isTwoPair() {
 		int c = 0
-		for (int i = 0; i < cartas.size(); i++) {
-			for (int j = 1; j < cartas.size(); j++) {
-				if (i != j) {
-					if (cartas[i].compareTo(cartas[j]) == 0) {
-
-						c++
-					}
+		for (int i = 0; i < cartas.size() - 1; i++) {
+			if (cartas[i] == cartas[i + 1]) {
+				cartaDesempate = cartas[i]
+				if(cartas[i] > cartaDesempate){
+					cartaDesempate = cartas[i]
 				}
+				c++
 			}
 		}
-		if (c == 3) {
+		if (c == 2) {
 			return true
 		} else {
 			return false
@@ -94,17 +74,13 @@ class Mao {
 
 	boolean isTree() {
 		int c = 0
-		for (int i = 0; i < cartas.size(); i++) {
-			for (int j = 1; j < cartas.size(); j++) {
-				if (i != j) {
-					if (cartas[i].compareTo(cartas[j]) == 0) {
+		for (int i = 0; i < cartas.size() - 1; i++) {
+			if (cartas[i] == cartas[i + 1] && cartas[i] == cartas[i + 2]) {
 
-						c++
-					}
-				}
+				c++
 			}
 		}
-		if (c == 4) {
+		if (c == 1) {
 			return true
 		} else {
 			return false
@@ -135,17 +111,13 @@ class Mao {
 
 	boolean isFlush() {
 		int c = 0
-		for (int i = 0; i < cartas.size(); i++) {
-			for (int j = 1; j < cartas.size(); j++) {
-				if (i != j) {
-					if (cartas[i].compareToNaipe(cartas[j]) == 0) {
+		for (int i = 0; i < cartas.size() - 1; i++) {
+			if (cartas[i].naipe == (cartas[i + 1].naipe)) {
 
-						c++
-					}
-				}
+				c++
 			}
 		}
-		if (c == 16) {
+		if (c == 4) {
 			return true
 		} else {
 			return false
@@ -154,38 +126,28 @@ class Mao {
 	}
 
 	boolean isFullHouse() {
-		int c = 0
-		for (int i = 0; i < cartas.size(); i++) {
-			for (int j = 1; j < cartas.size(); j++) {
-				if (i != j) {
-					if (cartas[i].compareTo(cartas[j]) == 0) {
-
-						c++
-					}
-				}
+		if (isTree()) {
+			if (cartas[0] == cartas[1] && cartas[3] == cartas[4]) {
+				return true
+			} else {
+				return false
 			}
-		}
-		if (c == 6 || c == 7) {
-			return true
 		} else {
 			return false
 		}
+
 
 	}
 
 	boolean isFour() {
 		int c = 0
-		for (int i = 0; i < cartas.size(); i++) {
-			for (int j = 1; j < cartas.size(); j++) {
-				if (i != j) {
-					if (cartas[i].compareTo(cartas[j]) == 0) {
+		for (int i = 0; i < cartas.size() - 1; i++) {
+			if (cartas[i] == cartas[i + 1] && cartas[i] == cartas[i + 2] && cartas[i] == cartas[i + 3]) {
 
-						c++
-					}
-				}
+				c++
 			}
 		}
-		if (c == 9) {
+		if (c == 1) {
 			return true
 		} else {
 			return false
@@ -213,7 +175,6 @@ class Mao {
 
 
 	}
-
 
 
 	@Override
