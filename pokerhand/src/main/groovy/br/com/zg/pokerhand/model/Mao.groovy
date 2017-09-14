@@ -60,7 +60,7 @@ class Mao {
 	}
 
 	private boolean isStraight(){
-		return (cartas.valor.last().ordinal() - cartas.valor.first().ordinal()) == 4
+		return ((cartas.valor.last().ordinal() - cartas.valor.first().ordinal()) == 4) && existeGrupos(5,1)
 	}
 
 	private boolean isFlush(){
