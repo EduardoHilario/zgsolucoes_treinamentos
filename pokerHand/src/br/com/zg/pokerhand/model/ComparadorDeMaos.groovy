@@ -10,7 +10,7 @@ class ComparadorDeMaos {
 		} else {
 			if (mao1.categoria == Categoria.PAIR || mao1.categoria == Categoria.TWO_PAIR) {
 
-				return desempata(mao1, mao2)
+				return kicker(mao1, mao2)
 			} else {
 				return maiorCarta(mao1, mao2)
 			}
@@ -27,15 +27,6 @@ class ComparadorDeMaos {
 		}
 	}
 
-	Resultado desempata(Mao mao1, Mao mao2) {
-		if (mao1.cartaDesempate > mao2.cartaDesempate) {
-			return Resultado.WIN
-		} else if (mao1.cartaDesempate < mao2.cartaDesempate) {
-			return Resultado.LOSS
-		} else {
-			return kicker(mao1, mao2)
-		}
-	}
 
 	Resultado kicker(Mao mao1, Mao mao2) {
 		for (int i = 0; i < mao1.cartas.size(); i++) {

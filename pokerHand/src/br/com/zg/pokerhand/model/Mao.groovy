@@ -1,179 +1,88 @@
 package br.com.zg.pokerhand.model
 
+import static br.com.zg.pokerhand.model.Categoria.*
+
 class Mao {
 
-	Carta cartaDesempate = new Carta()
 	List<Carta> cartas = new ArrayList<Carta>()
 	Categoria categoria
 
+	Mao(String maoString) {
 
-	void ordenaMao() {
+		String[] maoVetor = maoString.split(" ")
+
+		maoVetor.each {
+			cartas << new Carta(it)
+		}
+
+		categoria = classificaMao()
+	}
+
+	private Categoria classificaMao() {
 		cartas.sort()
-	}
-
-	void classificaMao() {
-		ordenaMao()
 		if (isRoyalStraightFlush()) {
-			categoria = Categoria.ROYAL_FLUSH
+			return ROYAL_FLUSH
 		} else if (isStraightFlush()) {
-			categoria = Categoria.STRAIGHT_FLUSH
+			return STRAIGHT_FLUSH
 		} else if (isFour()) {
-			categoria = Categoria.FOUR
+			return FOUR
 		} else if (isFullHouse()) {
-			categoria = Categoria.FULL_HOUSE
+			return FULL_HOUSE
 		} else if (isFlush()) {
-			categoria = Categoria.FLUSH
+			return FLUSH
 		} else if (isStraight()) {
-			categoria = Categoria.STRAIGHT
-		} else if (isTree()) {
-			categoria = Categoria.THREE
+			return STRAIGHT
+		} else if (isThree()) {
+			return THREE
 		} else if (isTwoPair()) {
-			categoria = Categoria.TWO_PAIR
+			return TWO_PAIR
 		} else if (isPair()) {
-			categoria = Categoria.PAIR
-		} else  {
-			categoria = Categoria.HIGH_CARD
-		}
-	}
-
-
-	boolean isPair() {
-		int c = 0
-		for (int i = 0; i < cartas.size() - 1; i++) {
-			if (cartas[i] == cartas[i + 1]) {
-				cartaDesempate = cartas[i]
-				c++
-			}
-		}
-		if (c == 1) {
-			return true
+			return PAIR
 		} else {
-			return false
+			return HIGH_CARD
 		}
-
 	}
 
-	boolean isTwoPair() {
-		int c = 0
-		for (int i = 0; i < cartas.size() - 1; i++) {
-			if (cartas[i] == cartas[i + 1]) {
-				cartaDesempate = cartas[i]
-				if(cartas[i] > cartaDesempate){
-					cartaDesempate = cartas[i]
-				}
-				c++
-			}
-		}
-		if (c == 2) {
-			return true
-		} else {
-			return false
-		}
-
+	private boolean existeGrupos(int quantidade, int tamanho){
+		return cartas.groupBy {it.valor}.values()
+		.findAll {it.size() == tamanho}
+		.size() == quantidade
 	}
 
-	boolean isTree() {
-		int c = 0
-		for (int i = 0; i < cartas.size() - 1; i++) {
-			if (cartas[i] == cartas[i + 1] && cartas[i] == cartas[i + 2]) {
-
-				c++
-			}
-		}
-		if (c == 1) {
-			return true
-		} else {
-			return false
-		}
-
+	private boolean isPair(){
+		return existeGrupos(1,2)
 	}
 
-	boolean isStraight() {
-		int c = 0
-		for (int i = 0; i < cartas.size() - 1; i++) {
-
-			int proximoDaSequencia = cartas[i + 1].valor.valorNum
-			proximoDaSequencia--
-
-			if (cartas[i].valor.valorNum == proximoDaSequencia) {
-				c++
-			}
-
-		}
-
-		if (c == 4) {
-			return true
-		} else {
-			return false
-		}
-
+	private boolean isTwoPair(){
+		return existeGrupos(2,2)
 	}
 
-	boolean isFlush() {
-		int c = 0
-		for (int i = 0; i < cartas.size() - 1; i++) {
-			if (cartas[i].naipe == (cartas[i + 1].naipe)) {
-
-				c++
-			}
-		}
-		if (c == 4) {
-			return true
-		} else {
-			return false
-		}
-
+	private boolean isThree(){
+		return existeGrupos(1,3)
 	}
 
-	boolean isFullHouse() {
-		if (isTree()) {
-			if (cartas[0] == cartas[1] && cartas[3] == cartas[4]) {
-				return true
-			} else {
-				return false
-			}
-		} else {
-			return false
-		}
-
-
+	private boolean isStraight(){
+		return (cartas.valor.last().ordinal() - cartas.valor.first().ordinal()) == 4
 	}
 
-	boolean isFour() {
-		int c = 0
-		for (int i = 0; i < cartas.size() - 1; i++) {
-			if (cartas[i] == cartas[i + 1] && cartas[i] == cartas[i + 2] && cartas[i] == cartas[i + 3]) {
-
-				c++
-			}
-		}
-		if (c == 1) {
-			return true
-		} else {
-			return false
-		}
-
+	private boolean isFlush(){
+		return cartas.groupBy {it.naipe}.values().size() == 1
 	}
 
-	boolean isStraightFlush() {
-
-		if (isStraight() && isFlush()) {
-			return true
-		}
-
-		return false
-
+	private boolean isFullHouse() {
+		return isPair() && isThree()
 	}
 
-	boolean isRoyalStraightFlush() {
+	private boolean isFour() {
+		return existeGrupos(1,4)
+	}
 
-		if (cartas.valor[0].valorNum == 10 && isStraight() && isFlush()) {
-			return true
-		}
+	private boolean isStraightFlush() {
+		return isStraight() && isFlush()
+	}
 
-		return false
-
-
+	private boolean isRoyalStraightFlush() {
+		return cartas.valor[0] == ValorDaCarta.DEZ && isStraightFlush()
 	}
 
 
