@@ -1,6 +1,6 @@
 package br.com.zg.pokerhand.model
 
-class Carta implements Comparable {
+class Carta implements Comparable<Carta> {
 
 	ValorDaCarta valor
 	NaipeDaCarta naipe
@@ -72,16 +72,9 @@ class Carta implements Comparable {
 	}
 
 	@Override
-	int compareTo(Object o) {
-		Carta c = o as Carta
+	int compareTo(Carta o) {
 
-		if (c.valor == valor) {
-			return 0
-		} else if (c.valor > valor) {
-			return -1
-		} else {
-			return 1
-		}
+		return this.valor.ordinal() - o.valor.ordinal()
 	}
 
 }
