@@ -1,7 +1,7 @@
 
 
 import br.com.zg.pokerhand.model.Categoria
-import br.com.zg.pokerhand.model.ComparadorDeMaos
+import br.com.zg.pokerhand.model.DisputaDeMaos
 import br.com.zg.pokerhand.model.Mao
 import br.com.zg.pokerhand.model.Resultado
 import spock.lang.Specification
@@ -9,14 +9,37 @@ import spock.lang.Unroll
 
 class Test extends Specification {
 	@Unroll
-	def "Verifica se a primeira mao ganha ou empata com a segunda"(){
+	def "Testando desempates de carta alta"(){
 		given:
-		ComparadorDeMaos comparaMaos = new ComparadorDeMaos()
+		DisputaDeMaos comparaMaos = new DisputaDeMaos()
 		Mao mao1 = new Mao(mao1String)
 		Mao mao2 = new Mao(mao2String)
 
 		expect:
-		resultado == comparaMaos.compareMaos(mao1,mao2)
+		resultado == comparaMaos.compare(mao1,mao2)
+
+		where:
+
+		mao1String 		 | mao2String 		|| resultado
+		"2C 8S 4S 5H TD" | "TC 3H 4C 8H 9C" || Resultado.LOSS
+		"2C 3C 4S 5H 6D" | "3C 4H 5C 6H 7C" || Resultado.LOSS
+		"2C 3C 4S 5H 6D" | "3C 4H 5C 6H 7C" || Resultado.LOSS
+
+
+
+
+
+
+	}
+	@Unroll
+	def "Verifica se a primeira mao ganha ou empata com a segunda"(){
+		given:
+		DisputaDeMaos comparaMaos = new DisputaDeMaos()
+		Mao mao1 = new Mao(mao1String)
+		Mao mao2 = new Mao(mao2String)
+
+		expect:
+		resultado == comparaMaos.compare(mao1,mao2)
 
 		where:
 
@@ -60,6 +83,8 @@ class Test extends Specification {
 		"2H 2H 2H AH AS" | "2C 2C 2C JC JS" || Resultado.WIN
 		"2H 2H 5H AH AS" | "2C 2C 6C AC AS" || Resultado.LOSS
 		"2H 3C 3D 3S 6H" | "2C 3D 4D 5C 6C" || Resultado.LOSS
+
+
 
 
 

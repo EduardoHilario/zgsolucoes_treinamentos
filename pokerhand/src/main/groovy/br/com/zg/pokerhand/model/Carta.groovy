@@ -74,6 +74,7 @@ class Carta implements Comparable {
 	@Override
 	int compareTo(Object o) {
 		Carta c = o as Carta
+
 		if (c.valor == valor) {
 			return 0
 		} else if (c.valor > valor) {
